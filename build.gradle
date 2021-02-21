@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation group: 'net.serenity-bdd', name: 'serenity-core', version: '2.3.13'
+    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: '2.3.13'
+    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber6', version: '2.3.10'
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: '2.3.13'
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: '2.3.13'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha1'
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+    testImplementation group: 'info.cukes', name: 'cucumber-junit', version: '1.2.6', ext: 'pom'
+}
+
+test {
+    useJUnitPlatform()
+}
