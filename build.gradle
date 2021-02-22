@@ -1,31 +1,60 @@
-plugins {
-    id 'java'
-}
+defaultTasks 'clean','test','aggregate'
 
-group 'org.example'
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+group 'org.automationserenity'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+buildscript {
+    project.ext {
+        serenityVersion = '2.0.60'
+    }
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath('net.serenity-bdd:serenity-gradle-plugin:' + serenityVersion)
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    serenityVersion = '2.0.60'
+    serenityCucumberVersion = '1.9.43'
+}
+
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    implementation group: 'net.serenity-bdd', name: 'serenity-core', version: '2.3.13'
-    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: '2.3.13'
-    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber6', version: '2.3.10'
-    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: '2.3.13'
-    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: '2.3.13'
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
-    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha1'
+    testCompile "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testCompile "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    testCompile "junit:junit:4.12"
+    testCompile "org.assertj:assertj-core:3.11.1"
+    testCompile "org.slf4j:slf4j-simple:1.7.25"
+    compile "net.serenity-bdd:serenity-core:${serenityVersion}"
+    compile "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    compile "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}"
+    compile "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    compile "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
-    testImplementation group: 'info.cukes', name: 'cucumber-junit', version: '1.2.6', ext: 'pom'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-M2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0-M2'
+    testCompile group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.7.0'
+
 }
 
 test {
     useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

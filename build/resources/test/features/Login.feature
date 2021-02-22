@@ -1,10 +1,10 @@
-Feature: Login
+Feature: Como usuario loguearme para tener una cuenta en la pagina New Experience
 
   @LoginSuccessful
   Scenario Outline: Login
-    Given El usuario abre la aplicacion New Experience
-    When  El usuario ingresa <email> y <contrasena>
-    Then  El usuario debe ver su cuenta <validtexto>
+    Given el usuario abre la aplicacion
+    When el usuario ingresa <email> y <contrasena>
+    Then el usuario debe ver su cuenta <validtexto>
     Examples:
     |email|contrasena|validtexto|
-    |svalencia@gmail.com|123456789|My account|
+    |svalencia@gmail.com|123456789|MY ACCOUNT|

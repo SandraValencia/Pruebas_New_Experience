@@ -1,10 +1,10 @@
-Feature: Create_Account
+Feature: Como usuario quiero crear cuenta para comprar productos
 
   @CreateSuccessful
-  Scenario Outline: Create_Account
-    Given El usuario ingresa a la aplicacion
-    When  El usuario ingresa <email> <nombre> <apellido> <contrasena> <nombre_1> <apellido_1> <compania> <direccion> <direccion_1> <ciudad> <codigo_postal> <informacion> <telefono> <celular> <asignar_direccion>
-    Then  El usuario debe ver formulario para ingresar sus datos<validtext>
+  Scenario Outline: Crear cuenta
+    Given el usuario ingresa a la aplicacion
+    When el usuario debe ingresar <email> <nombre> <apellido> <contrasena> <nombre1> <apellido1> <compania> <direccion> <direccion1> <ciudad> <codigopostal> <informacion> <telefono> <celular> <asignardireccion>
+    Then el usuario debe ver el formulario para ingresar sus datos <validtext>
     Examples:
-    |email|nombre|apellido|contrasena|nombre_1|apellido_1|compania|direccion_1|ciudad|codigo_postal|informacion|telefono|celular|asignar_direccion|validtext|
-    |svalencia@gmail.com|sandra|valencia|1234*|sandra|valencia|testercompany|calle 4|05000|prueba|5313456| 311234567           |casa|create an account|
+    |email|nombre|apellido|contrasena|nombre1|apellido1|compania|direccion|direccion1|ciudad|codigopostal|informacion|telefono|celular|asignardireccion|validtext|
+    |scalderon1@gmail.com|sandra|valencia|1234*|sandra|valencia|testercompany|calle4|calle5|Medellin|05000|prueba|5313456|311234568|casa|MY ACCOUNT|
